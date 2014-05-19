@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Spark Core 简介</title>
+
+		<meta name="description" content="BigData培训资料（二）">
+		<meta name="author" content="zhanghuabin">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<p><span class="commonhead commonmenu">Spark Core 简介</span></p>
+					</br> 
+					</br>
+					<p class="commonright">姓名：<a href="#">张华彬</a></p>
+					<p class="commonright">日期：<a href="#"><font face="comic sans ms">2014-05-23</font></a></p>
+					<iframe src="http://ghbtns.com/github-btn.html?user=zhanghuabin&repo=bd-spark-core-intro&type=fork"
+					  allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
+					<iframe src="http://ghbtns.com/github-btn.html?user=zhanghuabin&repo=bd-spark-core-intro&type=watch"
+					  allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
+					
+				</section>
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（一） Apache Spark</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">什么是Spark</h3>
+					<ol>
+						<li class="fragment commoncsm">基于内存的迭代式数据分析集群计算框架</li>
+						<li class="fragment commoncsm">由UC Berkeley AMPLab贡献，已为Apache顶级项目</li>
+						<li class="fragment commoncsm">基于分布式的内存数据集缓存，使得分析速度大幅提升</li>
+						<li class="fragment commoncsm">支持多种计算模型</li>
+					</ol>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（二） 基本原理</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">RDD(Resilient Distributed Dataset)</h3>
+					<ol>
+						<li class="fragment commoncsm">利用checkpoint和lineage提供容错</li>
+						<li class="fragment commoncsm">支持全内存、全磁盘或者混合共3种存储模式</li>
+						<li class="fragment commoncsm">惰性</li>
+					</ol>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Transforms与Actions</h3>
+					<ol>
+						<li class="fragment commoncsm">Transforms：用于生成RDD，或者从既有RDD转换为另一个RDD，比如map、filter、flatMap、sample、groupByKey、reduceByKey、union、join、mapValues、sort等</li>
+						<li class="fragment commoncsm">Actions：在RDD上的一些操作，比如count、collect、reduce、lookup、save等</li>
+					</ol>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（三） 环境准备</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Local Dev Environment</h3>
+					<ol>
+						<li class="fragment commoncsm">VMWare / VirtualBox</li>
+						<li class="fragment commoncsm">CDH 5 QuickStart VM</li>
+						<li class="fragment commoncsm">Ooyala Spark JobServer</li>
+						<li class="fragment commoncsm">Windows+Cygwin / Linux / Mac</li>
+						<li class="fragment commoncsm">Configure passwordless SSH logon</li>
+					</ol>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（四） 示例：单表连接</h2>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（五） 参考实现</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">模拟Hadoop MR</h3>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">更加Spark风格</h3>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（六） Q&A</h2>
+				</section>
+
+				<section>
+					<h1 class="exclusive">「谢谢」</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'default',
+				dependencies: [
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
