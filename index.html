@@ -34,7 +34,6 @@
 					  allowtransparency="true" frameborder="0" scrolling="0" width="132" height="20"></iframe>
 					<iframe src="http://ghbtns.com/github-btn.html?user=zhanghuabin&repo=bd-spark-core-intro&type=watch"
 					  allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
-					
 				</section>
 
 				<section>
@@ -88,6 +87,108 @@
 
 				<section>
 					<h2 class="commontitle commongreen commoncsm">（四） 示例：单表连接</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">思路（一）：模拟Hadoop MR流程</h3>
+					<ol>
+						<li class="fragment commoncsm">Map（分治，构造左右表）</li>
+						<li class="fragment commoncsm">GroupByKey（根据Key分组）</li>
+						<li class="fragment commoncsm">Combine（本地合并，去冗余）</li>
+						<li class="fragment commoncsm">Reduce（规约，求笛卡尔积）</li>
+						<li class="fragment commoncsm">参考上期培训内容</li>
+					</ol>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">思路（二）：Spark Style</h3>
+					<ol>
+						<li class="fragment commoncsm">Split（直接拆分出左右表）</li>
+						<li class="fragment commoncsm">Join（左右表内联）</li>
+					</ol>
+				</section>
+
+
+				<section>
+					<h2 class="commontitle commongreen commoncsm">（五） 思路（二）RDD变换详解</h2>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">原始表</h3>
+					<pre><code contenteditable>Tom,Lucy
+Tom,Jack
+Jone,Lucy
+Jone,Jack
+Lucy,Mary
+Lucy,Ben
+Jack,Alice
+Jack,Jesse
+Terry,Alice
+Terry,Jesse
+Philip,Terry
+Philip,Alma
+Mark,Terry
+Mark,Alma</code></pre>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Split之后</h3>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">左表</h3>
+					<pre><code contenteditable>(Lucy,(Tom,Lucy))
+(Jack,(Tom,Jack))
+(Lucy,(Jone,Lucy))
+(Jack,(Jone,Jack))
+(Mary,(Lucy,Mary))
+(Ben,(Lucy,Ben))
+(Alice,(Jack,Alice))
+(Jesse,(Jack,Jesse))
+(Alice,(Terry,Alice))
+(Jesse,(Terry,Jesse))
+(Terry,(Philip,Terry))
+(Alma,(Philip,Alma))
+(Terry,(Mark,Terry))
+(Alma,(Mark,Alma))</code></pre>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">右表</h3>
+					<pre><code contenteditable>(Tom,(Tom,Lucy))
+(Tom,(Tom,Jack))
+(Jone,(Jone,Lucy))
+(Jone,(Jone,Jack))
+(Lucy,(Lucy,Mary))
+(Lucy,(Lucy,Ben))
+(Jack,(Jack,Alice))
+(Jack,(Jack,Jesse))
+(Terry,(Terry,Alice))
+(Terry,(Terry,Jesse))
+(Philip,(Philip,Terry))
+(Philip,(Philip,Alma))
+(Mark,(Mark,Terry))
+(Mark,(Mark,Alma))</code></pre>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Join过程演示，第一步</h3>
+					<img src="img/join-0.png"  alt="左右表" />
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Join过程演示，第二步</h3>
+					<img src="img/join-1.png"  alt="左右表内联" />
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">Join之后</h3>
+					<pre><code contenteditable>(Terry,((Philip,Terry),(Terry,Alice)))
+(Terry,((Philip,Terry),(Terry,Jesse)))
+(Terry,((Mark,Terry),(Terry,Alice)))
+(Terry,((Mark,Terry),(Terry,Jesse)))
+(Jack,((Tom,Jack),(Jack,Alice)))
+(Jack,((Tom,Jack),(Jack,Jesse)))
+(Jack,((Jone,Jack),(Jack,Alice)))
+(Jack,((Jone,Jack),(Jack,Jesse)))
+(Lucy,((Tom,Lucy),(Lucy,Mary)))
+(Lucy,((Tom,Lucy),(Lucy,Ben)))
+(Lucy,((Jone,Lucy),(Lucy,Mary)))
+(Lucy,((Jone,Lucy),(Lucy,Ben)))</code></pre>
+				</section>
+				<section>
+					<h3 class="commontitle commongreen">组合并输出每行的Value Pair里面 Grand Child和Grand Parent</h3>
 				</section>
 
 
